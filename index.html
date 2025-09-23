@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Melodia - Sua Música, Sua Forma</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        crossorigin="anonymous"
+        referrerpolicy="no-referrer"
+    />
+    <link 
+        href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Quicksand:wght@400;600&display=swap" 
+        rel="stylesheet"
+    >
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
+    />
+    <link rel="stylesheet" href="src/assets/css/style.css">
+    <script src="src/js/app.js" defer></script>
+</head>
+<body class="bg-gray-50 text-gray-800 dark:bg-gray-900 dark:text-gray-200">
+
+    <header class="fixed top-0 left-0 w-screen z-10 flex justify-between items-center p-6 
+    bg-white/60 dark:bg-black/50 backdrop-blur-md shadow-md">
+        <h1 class="text-2xl font-bold text-pink-600 dark:text-pink-400">Melodia</h1>
+        <button id="themeToggle" 
+            class="px-4 py-2 rounded-lg bg-pink-600 text-white hover:bg-pink-500 
+                dark:bg-gray-700 dark:hover:bg-gray-600 transition">
+            🌙 Modo Escuro
+        </button>
+    </header>
+
+    <div class="h-20"></div>
+
+    <section class="bg-gradient-to-r from-pink-600 to-purple-700 text-white text-center py-20 px-6 dark:from-gray-800 dark:to-gray-900 flex flex-col items-center">
+        <h1 class="text-5xl font-bold mb-4"><i class="fa-solid fa-headphones"></i> Melodia: Sua Música, Sua Forma</h1>
+        <p class="text-lg max-w-2xl mx-auto mb-6">
+            Descubra novas músicas, crie playlists personalizadas e viva a melhor experiência sonora.
+        </p>
+
+        <input type="checkbox" id="abrir-modal" class="peer hidden" />
+        <label for="abrir-modal" class="bg-white text-pink-600 font-bold py-3 px-6 rounded-lg shadow-lg hover:bg-gray-200 dark:bg-gradient-to-r dark:from-pink-600 dark:to-purple-700 dark:text-white cursor-pointer transition">
+            Ouvir Agora
+        </label>
+
+        <div class="fixed inset-0 bg-black/50 hidden peer-checked:flex items-center justify-center z-50">
+            <div class="bg-white dark:bg-gray-800 text-gray-800 dark:text-white p-5 rounded-xl shadow-lg
+                        w-full max-w-[95%] md:max-w-md lg:max-w-lg mx-auto max-h-[90vh] overflow-y-auto relative">
+                <label for="abrir-modal" class="absolute top-1 right-2 cursor-pointer text-gray-500 hover:text-gray-800 dark:hover:text-white text-4xl font-bold">&times;</label>
+                <img src="image.png" alt="Imagem de destaque" class="rounded-lg mb-4 w-full object-cover">
+                <h2 class="text-2xl mb-2">Bem-vindo ao Melodia!</h2>
+                <p class="text-gray-700 dark:text-gray-300">
+                    O site está em fase de testes e algumas funcionalidades ainda não estão disponíveis. Explore, teste e aguarde as novidades!
+                </p>
+                <audio id="modalAudio" loop>
+                    <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+                    Seu navegador não suporta áudio.
+                </audio>
+            </div>
+        </div>
+    </section>
+
+    <section id="apresentacao" class="py-16 px-6 max-w-6xl mx-auto bg-gray-50 dark:bg-gray-900 z-0">
+        <h2 class="text-4xl text-pink-600 dark:text-pink-400 mb-12 text-center font-bold">Por que escolher o Melodia?</h2>
+        <div class="max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
+            <div class="flex flex-col items-center text-center p-6 bg-white dark:bg-gray-800 rounded-xl shadow-md hover:scale-105 transition-transform" data-aos="fade-right">
+                <div class="mb-4 bg-pink-100 dark:bg-pink-900 p-4 rounded-full">
+                    <i class="fa-solid fa-headphones text-4xl text-pink-600 dark:text-pink-400"></i>
+                </div>
+                <h3 class="text-2xl font-semibold mb-2">Som Superior</h3>
+                <p class="text-lg text-gray-700 dark:text-gray-300">Qualidade de áudio profissional para suas músicas favoritas.</p>
+            </div>
+
+            <div class="flex flex-col items-center text-center p-6 bg-white dark:bg-gray-800 rounded-xl shadow-md hover:scale-105 transition-transform" data-aos="fade-left">
+                <div class="mb-4 bg-pink-100 dark:bg-pink-900 p-4 rounded-full">
+                    <i class="fa-solid fa-music text-4xl text-pink-600 dark:text-pink-400"></i>
+                </div>
+                <h3 class="text-2xl font-semibold mb-2">Playlists Personalizadas</h3>
+                <p class="text-lg text-gray-700 dark:text-gray-300">Monte playlists únicas que combinam com seu estilo.</p>
+            </div>
+
+            <div class="flex flex-col items-center text-center p-6 bg-white dark:bg-gray-800 rounded-xl shadow-md hover:scale-105 transition-transform" data-aos="fade-right">
+                <div class="mb-4 bg-pink-100 dark:bg-pink-900 p-4 rounded-full">
+                    <i class="fa-solid fa-magnifying-glass text-4xl text-pink-600 dark:text-pink-400"></i>
+                </div>
+                <h3 class="text-2xl font-semibold mb-2">Descoberta de Artistas</h3>
+                <p class="text-lg text-gray-700 dark:text-gray-300">Encontre novos talentos musicais em ascensão.</p>
+            </div>
+
+            <div class="flex flex-col items-center text-center p-6 bg-white dark:bg-gray-800 rounded-xl shadow-md hover:scale-105 transition-transform" data-aos="fade-left">
+                <div class="mb-4 bg-pink-100 dark:bg-pink-900 p-4 rounded-full">
+                    <i class="fa-solid fa-mobile-screen-button text-4xl text-pink-600 dark:text-pink-400"></i>
+                </div>
+                <h3 class="text-2xl font-semibold mb-2">Interface Intuitiva</h3>
+                <p class="text-lg text-gray-700 dark:text-gray-300">Design clean, fácil de usar e feito para você.</p>
+            </div>
+
+            <div class="flex flex-col items-center text-center p-6 bg-white dark:bg-gray-800 rounded-xl shadow-md hover:scale-105 transition-transform" data-aos="fade-up">
+                <div class="mb-4 bg-pink-100 dark:bg-pink-900 p-4 rounded-full">
+                    <i class="fa-solid fa-cloud-arrow-down text-4xl text-pink-600 dark:text-pink-400"></i>
+                </div>
+                <h3 class="text-2xl font-semibold mb-2">Modo Offline</h3>
+                <p class="text-lg text-gray-700 dark:text-gray-300">Ouça suas músicas favoritas mesmo sem internet.</p>
+            </div>
+
+            <div class="flex flex-col items-center text-center p-6 bg-white dark:bg-gray-800 rounded-xl shadow-md hover:scale-105 transition-transform" data-aos="fade-up">
+                <div class="mb-4 bg-pink-100 dark:bg-pink-900 p-4 rounded-full">
+                    <i class="fa-solid fa-brain text-4xl text-pink-600 dark:text-pink-400"></i>
+                </div>
+                <h3 class="text-2xl font-semibold mb-2">Recomendações Inteligentes</h3>
+                <p class="text-lg text-gray-700 dark:text-gray-300">Sugestões personalizadas baseadas no seu gosto musical.</p>
+            </div>
+
+            <div class="flex flex-col items-center text-center p-6 bg-white dark:bg-gray-800 rounded-xl shadow-md hover:scale-105 transition-transform" data-aos="fade-up">
+                <div class="mb-4 bg-pink-100 dark:bg-pink-900 p-4 rounded-full">
+                    <i class="fa-solid fa-chart-line text-4xl text-pink-600 dark:text-pink-400"></i>
+                </div>
+                <h3 class="text-2xl font-semibold mb-2">Estatísticas de Ouvir</h3>
+                <p class="text-lg text-gray-700 dark:text-gray-300">Acompanhe suas músicas mais ouvidas e descubra seu comportamento musical.</p>
+            </div>
+
+            <div class="flex flex-col items-center text-center p-6 bg-white dark:bg-gray-800 rounded-xl shadow-md hover:scale-105 transition-transform" data-aos="fade-up">
+                <div class="mb-4 bg-pink-100 dark:bg-pink-900 p-4 rounded-full">
+                    <i class="fa-solid fa-headset text-4xl text-pink-600 dark:text-pink-400"></i>
+                </div>
+                <h3 class="text-2xl font-semibold mb-2">Suporte Premium</h3>
+                <p class="text-lg text-gray-700 dark:text-gray-300">Tenha acesso a suporte prioritário para resolver qualquer problema rapidamente.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="bg-gray-100 py-16 px-6 dark:bg-gray-800">
+        <section class="md:hidden">
+            <h2 class="text-4xl text-center text-pink-600 dark:text-pink-400 mb-12">Funcionalidades</h2>
+            <div class="grid gap-8 max-w-6xl mx-auto 
+                        grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
+                <div class="bg-white dark:bg-gray-900 p-6 rounded-xl shadow-md flex flex-col items-center text-center" data-aos="flip-left">
+                    <i class="fa-solid fa-circle-play text-4xl text-pink-600 dark:text-pink-400 mb-4"></i>
+                    <h3 class="text-3xl font-semibold mb-2">Streaming Ilimitado</h3>
+                    <p class="text-lg">Ouça músicas a qualquer hora sem limites.</p>
+                </div>
+
+                <div class="bg-white dark:bg-gray-900 p-6 rounded-xl shadow-md flex flex-col items-center text-center" data-aos="flip-up">
+                    <i class="fa-solid fa-heart text-4xl text-pink-600 dark:text-pink-400 mb-4"></i>
+                    <h3 class="text-3xl font-semibold mb-2">Favoritos</h3>
+                    <p class="text-lg">Salve músicas e playlists favoritas.</p>
+                </div>
+
+                <div class="bg-white dark:bg-gray-900 p-6 rounded-xl shadow-md flex flex-col items-center text-center" data-aos="flip-right">
+                    <i class="fa-solid fa-share-nodes text-4xl text-pink-600 dark:text-pink-400 mb-4"></i>
+                    <h3 class="text-3xl font-semibold mb-2">Compartilhamento</h3>
+                    <p class="text-lg">Compartilhe músicas com amigos em um clique.</p>
+                </div>
+
+                <div class="bg-white dark:bg-gray-900 p-6 rounded-xl shadow-md flex flex-col items-center text-center" data-aos="flip-down">
+                    <i class="fa-solid fa-microphone text-4xl text-pink-600 dark:text-pink-400 mb-4"></i>
+                    <h3 class="text-3xl font-semibold mb-2">Podcasts</h3>
+                    <p class="text-lg">Descubra e ouça podcasts exclusivos diretamente no app.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="hidden md:block">
+            <h2 class="text-4xl text-center text-pink-600 dark:text-pink-400 mb-12">Funcionalidades</h2>
+            <div class="max-w-4xl mx-auto">
+                <input type="radio" id="tab1" name="tabs" class="peer/aba1 hidden" checked />
+                <label for="tab1" class="text-xl inline-block cursor-pointer px-4 py-2 text-gray-500
+                                        hover:text-pink-600 dark:hover:text-pink-400
+                                        peer-checked/aba1:text-pink-600 dark:peer-checked/aba1:text-pink-400
+                                        peer-checked/aba1:border-b-2 peer-checked/aba1:border-pink-600 dark:peer-checked/aba1:border-pink-400
+                                        transition">
+                    <i class="fa-solid fa-circle-play mr-2"></i>Streaming
+                </label>
+
+                <input type="radio" id="tab2" name="tabs" class="peer/aba2 hidden" />
+                <label for="tab2" class="text-xl inline-block cursor-pointer px-4 py-2 text-gray-500
+                                        hover:text-pink-600 dark:hover:text-pink-400
+                                        peer-checked/aba2:text-pink-600 dark:peer-checked/aba2:text-pink-400
+                                        peer-checked/aba2:border-b-2 peer-checked/aba2:border-pink-600 dark:peer-checked/aba2:border-pink-400
+                                        transition">
+                    <i class="fa-solid fa-share-nodes mr-2"></i>Compartilhamento
+                </label>
+
+                <input type="radio" id="tab3" name="tabs" class="peer/aba3 hidden" />
+                <label for="tab3" class="text-xl inline-block cursor-pointer px-4 py-2 text-gray-500
+                                        hover:text-pink-600 dark:hover:text-pink-400
+                                        peer-checked/aba3:text-pink-600 dark:peer-checked/aba3:text-pink-400
+                                        peer-checked/aba3:border-b-2 peer-checked/aba3:border-pink-600 dark:peer-checked/aba3:border-pink-400
+                                        transition">
+                    <i class="fa-solid fa-heart mr-2"></i>Favoritos
+                </label>
+
+                <input type="radio" id="tab4" name="tabs" class="peer/aba4 hidden" />
+                <label for="tab4" class="text-xl inline-block cursor-pointer px-4 py-2 text-gray-500
+                                        hover:text-pink-600 dark:hover:text-pink-400
+                                        peer-checked/aba4:text-pink-600 dark:peer-checked/aba4:text-pink-400
+                                        peer-checked/aba4:border-b-2 peer-checked/aba4:border-pink-600 dark:peer-checked/aba4:border-pink-400
+                                        transition">
+                    <i class="fa-solid fa-microphone mr-2"></i>Podcasts
+                </label>
+
+                <div class="w-full border-t border-gray-300 dark:border-gray-600 -mt-px"></div>
+
+                <div class="py-4 hidden peer-checked/aba1:block">
+                    <p class="text-xl font-semibold text-gray-800 dark:text-white"><i class="fa-solid fa-circle-play mr-2"></i>Streaming Ilimitado</p>
+                    <p class="text-gray-600 dark:text-gray-300">
+                        Ouça músicas a qualquer hora, sem interrupções, com qualidade HD. Crie suas playlists e descubra novas músicas todos os dias, mantendo sua experiência totalmente personalizada.
+                    </p>
+                </div>
+                
+                <div class="py-4 hidden peer-checked/aba2:block">
+                    <p class="text-xl font-semibold text-gray-800 dark:text-white"><i class="fa-solid fa-share-nodes mr-2"></i>Compartilhamento</p>
+                    <p class="text-gray-600 dark:text-gray-300">
+                        Compartilhe suas músicas, playlists e podcasts favoritos com amigos ou em redes sociais, facilitando a descoberta de novos conteúdos e tornando a experiência musical mais social.
+                    </p>
+                </div>
+
+                <div class="py-4 hidden peer-checked/aba3:block">
+                    <p class="text-xl font-semibold text-gray-800 dark:text-white"><i class="fa-solid fa-heart mr-2"></i>Favoritos</p>
+                    <p class="text-gray-600 dark:text-gray-300">
+                        Salve suas músicas, álbuns e artistas preferidos em um só lugar. Organize suas playlists e acesse rapidamente seus conteúdos favoritos, mantendo tudo ao seu alcance de forma prática e intuitiva.
+                    </p>
+                </div>
+
+                <div class="py-4 hidden peer-checked/aba4:block">
+                    <p class="text-xl font-semibold text-gray-800 dark:text-white"><i class="fa-solid fa-microphone mr-2"></i>Podcasts Exclusivos</p>
+                    <p class="text-gray-600 dark:text-gray-300">
+                        Descubra e ouça podcasts exclusivos diretamente no app. Explore conteúdos variados, desde música, tecnologia, entrevistas e cultura, com recomendações personalizadas de acordo com seus interesses.
+                    </p>
+                </div>
+            </div>
+        </section>
+    </section>
+
+    <section class="py-16 px-6 max-w-6xl mx-auto">
+        <h2 class="text-4xl text-center text-pink-600 dark:text-pink-400 mb-8">
+            O que dizem os usuários
+        </h2>
+        <div class="swiper">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide">
+                    <blockquote
+                    class="bg-white dark:bg-gray-800 p-6 my-3 rounded-xl shadow-lg"
+                    >
+                        <p class="italic">
+                            “O Melodia mudou a forma como eu ouço música! As playlists são
+                            incríveis.”
+                        </p>
+                        <footer
+                            class="mt-4 font-semibold flex items-center justify-start"
+                        >
+                            <img
+                            src="https://images.pexels.com/photos/1102341/pexels-photo-1102341.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+                            alt="Foto Ana Souza"
+                            class="w-10 h-10 rounded-full object-cover mr-2"
+                            />
+                            - Ana Souza 🎤
+                        </footer>
+                    </blockquote>
+                </div>
+
+                <div class="swiper-slide">
+                    <blockquote
+                    class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg"
+                    >
+                        <p class="italic">
+                            “Interface super fácil, encontrei artistas que nunca tinha
+                            ouvido antes!”
+                        </p>
+                        <footer
+                            class="mt-4 font-semibold flex items-center justify-start"
+                        >
+                            <img
+                            src="https://plus.unsplash.com/premium_photo-1664910471865-d2b3ac59a2e0?fm=jpg&q=60&w=3000"
+                            alt="Foto João Silva"
+                            class="w-10 h-10 rounded-full object-cover mr-2"
+                            />
+                            - João Silva 🎸
+                        </footer>
+                    </blockquote>
+                </div>
+
+                <div class="swiper-slide">
+                    <blockquote
+                    class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg"
+                    >
+                        <p class="italic">
+                            “Achei artistas novos e o design é maravilhoso, muito melhor
+                            que outros apps.”
+                        </p>
+                        <footer
+                            class="mt-4 font-semibold flex items-center justify-start"
+                        >
+                            <img
+                            src="https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg"
+                            alt="Foto Maria Fernandes"
+                            class="w-10 h-10 rounded-full object-cover mr-2"
+                            />
+                            - Mario Fernandes 🎧
+                        </footer>
+                    </blockquote>
+                </div>
+            </div>
+
+            <div class="swiper-button-prev text-pink-600 text-3xl md:text-4xl lg:text-5xl"></div>
+            <div class="swiper-button-next text-pink-600 text-3xl md:text-4xl lg:text-5xl"></div>
+        </div>
+    </section>
+
+    <section class="bg-pink-600 dark:bg-gray-800 py-16 px-6">
+        <h2 class="text-4xl text-center mb-8 text-white dark:text-pink-300">Cadastre-se nas Nossas Campanhas</h2>
+        
+        <form class="max-w-lg mx-auto space-y-6 bg-white dark:bg-gray-900 p-8 rounded-lg shadow-lg">
+            <div class="relative">
+                <input type="text" id="nome" placeholder=" " 
+                        class="peer w-full px-4 py-3 rounded-lg border border-gray-300 text-gray-800 dark:text-white dark:border-gray-600 dark:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-pink-300"
+                        required>
+                <label for="nome" class="absolute left-4 top-3 text-gray-500 dark:text-gray-400 
+                                        peer-placeholder-shown:top-3 peer-placeholder-shown:text-gray-400 
+                                        peer-placeholder-shown:text-base 
+                                        peer-focus:-top-0 peer-focus:text-sm peer-focus:text-pink-500 dark:peer-focus:text-pink-300
+                                        transition-all">Seu Nome</label>
+            </div>
+
+            <div class="relative">
+                <input type="email" id="email" placeholder=" " 
+                        class="peer w-full px-4 py-3 rounded-lg border border-gray-300 text-gray-800 dark:text-white dark:border-gray-600 dark:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-pink-300"
+                        required>
+                <label for="email" class="absolute left-4 top-3 text-gray-500 dark:text-gray-400 
+                                        peer-placeholder-shown:top-3 peer-placeholder-shown:text-gray-400 
+                                        peer-placeholder-shown:text-base 
+                                        peer-focus:-top-0 peer-focus:text-sm peer-focus:text-pink-500 dark:peer-focus:text-pink-300
+                                        transition-all">Seu E-mail</label>
+            </div>
+
+            <div>
+                <input type="checkbox" id="aceite" class="peer mr-2 w-4 h-4 cursor-pointer">
+                <label for="aceite" class="text-gray-700 dark:text-gray-200 cursor-pointer underline">
+                    Quero receber novidades e ofertas exclusivas!
+                </label>
+                <p class="text-sm text-green-600 mt-1 hidden peer-checked:block">
+                    Obrigado por aceitar receber nossas novidades! ✅
+                </p>
+            </div>
+
+            <button type="submit" 
+                    class="w-full bg-pink-500 text-white font-bold py-3 px-6 rounded-lg shadow-lg hover:bg-pink-600 transition dark:bg-gradient-to-r dark:from-pink-600 dark:to-purple-700 dark:text-white">
+                Cadastrar
+            </button>
+        </form>
+    </section>
+
+    <footer class="bg-gray-900 text-white py-8 text-center dark:bg-black">
+        <div class="max-w-6xl mx-auto px-6 grid md:grid-cols-3 gap-8 text-sm">
+            <div>
+                <h3 class="text-xl mb-2 text-pink-500">Contato</h3>
+                <p>Email: <a href="mailto:contato@melodia.com" class="hover:text-pink-400">contato@melodia.com</a></p>
+                <p>Telefone: <a href="tel:+551199999999" class="hover:text-pink-400">+55 (11) 99999-9999</a></p>
+                <p>Endereço: Av. Paulista, 1000 - São Paulo/SP</p>
+            </div>
+
+            <div>
+                <h3 class="text-xl mb-2 text-pink-500">Siga o Melodia</h3>
+                <div class="flex justify-center space-x-6 mt-4">
+                    <a href="#" class="hover:text-pink-500"><i class="fa-brands fa-instagram text-2xl"></i></a>
+                    <a href="#" class="hover:text-pink-500"><i class="fa-brands fa-twitter text-2xl"></i></a>
+                    <a href="#" class="hover:text-pink-500"><i class="fa-brands fa-youtube text-2xl"></i></a>
+                </div>
+            </div>
+
+            <div>
+                <h3 class="text-xl mb-2 text-pink-500">Informações</h3>
+                <ul class="space-y-2">
+                    <li><a href="#" class="hover:text-pink-400">Política de Privacidade</a></li>
+                    <li><a href="#" class="hover:text-pink-400">Termos de Uso</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="mt-6 border-t border-gray-700 pt-4">
+            <p class="text-gray-400">© 2025 Melodia - Todos os direitos reservados</p>
+        </div>
+    </footer>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+</body>
+</html>
